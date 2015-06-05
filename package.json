@@ -1,0 +1,20 @@
+{
+  "name": "kraken-angular",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jean-Charles Sisk <jeancharles@paypal.com>",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.4.0",
+    "express": "^4.12.4",
+    "kraken-js": "^2.0.0-rc.1",
+    "lusca": "^1.2.0"
+  },
+  "devDependencies": {
+    "tap": "^1.2.0"
+  }
+}

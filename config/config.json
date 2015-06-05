@@ -1,0 +1,13 @@
+{
+  "middleware": {
+    "appsec": {
+      "module": {
+        "arguments": [{
+          "csrf": {
+            "angular": true  
+          }  
+        }]  
+      }  
+    }
+  }
+}

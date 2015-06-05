@@ -1,0 +1,45 @@
+<!doctype html>
+<html ng-app="krakenApp">
+  <head>
+    <title>angular!</title>
+  </head>
+  <body>
+    <div ng-controller="favoriteAnimalsCtrl">
+      <h1>Animals and their sounds</h1>
+      Filter: <input ng-model="query">
+      <ul>
+        <li ng-repeat="animal in animals | filter:query">{{animal.name}} - {{animal.sound}}</li>
+      </ul>
+      <form ng-submit="addRowAsync()">
+        Name: <input name="name" ng-model="name">
+        Sound: <input name="sound" ng-model="sound">
+        <input type="submit" value="Add Animal">
+      </form>
+      <p ng-show="statusMessage">{{statusMessage}}</p>
+    </div>
+    <script src="/angular.js"></script>
+    <script>
+      var krakenApp = angular.module('krakenApp', []);
+
+      krakenApp.controller('favoriteAnimalsCtrl', function ($scope, $http) {
+        $scope.animals = [
+          {name: 'Cheetah', sound: 'roar im a cat'},
+          {name: 'Dingo', sound: 'roar im a dog or whatever'}
+        ];  
+
+        $scope.addRowAsync = function () {
+          var data = {name: $scope.name, sound: $scope.sound};
+          var post = $http.post('/make-animal', data);
+          $scope.animals.push(data); 
+          $scope.name=$scope.sound='';
+          post.success(function (data, status, headers, config) {
+            $scope.statusMessage = data.message;  
+          });
+          post.error(function (data, status, headers, config) {
+            $scope.statusMessage = 'ERROR: failed due to status: ' + status;
+          });
+        };
+      });
+    </script>
+  </body>
+</html>
